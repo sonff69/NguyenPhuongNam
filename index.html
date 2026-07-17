@@ -17,7 +17,7 @@
             background-color: #08020f;
             overflow-x: hidden;
         }
-        h1, h2, h3, h4, .comic-font {
+        h1, h2, h3, h4, .comic-font, .spidey-badge {
             font-family: 'Bangers', cursive;
             letter-spacing: 0.06em;
         }
@@ -46,21 +46,51 @@
             border: 3px solid #FFD000;
         }
 
-        /* Comic Book Thick Offset Shadows */
-        .comic-box {
+        /* Comic Book Thick Offset Shadows (Flat for Assignment Panel) */
+        .comic-box-flat {
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0px 0px #000;
+        }
+        .comic-box-flat:hover {
+            box-shadow: 12px 12px 0px 0px #00F0FF;
+        }
+
+        /* Comic Book Thick Offset Shadows with Tilt */
+        .comic-box-tilt {
             border: 4px solid #000;
             box-shadow: 8px 8px 0px 0px #000;
             transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .comic-box:hover {
-            transform: translate(-4px, -4px);
+        .comic-box-tilt:hover {
             box-shadow: 12px 12px 0px 0px #FF0055;
         }
+
         .comic-btn-active {
             transform: translate(4px, 4px) !important;
             box-shadow: 2px 2px 0px 0px #000 !important;
             background-color: #FF0055 !important;
             color: white !important;
+            border-color: #000 !important;
+        }
+
+        /* Spider-Sense Alarm Animation (Wiggly alert lines) */
+        .spider-sense {
+            position: relative;
+        }
+        .spider-sense::before {
+            content: '⚡⚡⚡';
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #FFD000;
+            font-size: 1.5rem;
+            animation: sense-wiggle 0.5s infinite alternate;
+        }
+
+        @keyframes sense-wiggle {
+            0% { transform: translateX(-52%) rotate(-5deg); text-shadow: 0 0 5px #FF0055; }
+            100% { transform: translateX(-48%) rotate(5deg); text-shadow: 0 0 10px #FFD000; }
         }
 
         /* Glitch Effect */
@@ -125,6 +155,14 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Spidey Web Dividers */
+        .web-divider {
+            height: 30px;
+            background-image: radial-gradient(circle at center, #FF0055 2px, transparent 3px);
+            background-size: 20px 20px;
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body class="text-white selection:bg-[#FF0055] selection:text-white relative halftone-bg">
@@ -176,7 +214,7 @@
 
     <!-- Hero Section -->
     <header class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-color-dodge" style="background-image: url('back.jpg');"></div>
+        <div class="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-color-dodge" style="background-image: url('back.jpg');"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#08020f] via-[#0d0221]/90 to-transparent"></div>
 
         <div class="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center py-12 z-10">
@@ -202,7 +240,7 @@
 
                 <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
                     <a href="#dashboard" class="comic-font text-lg bg-[#FF0055] text-white border-2 border-black px-6 py-3 rounded shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#FFD000] hover:text-black hover:shadow-[4px_4px_0px_0px_#00F0FF] transition-all duration-300">
-                        XEM BÀI TẬP <i class="fa-solid fa-angles-down ml-1"></i>
+                        KHÁM PHÁ BÀI TẬP <i class="fa-solid fa-angles-down ml-1"></i>
                     </a>
                     <a href="https://drive.google.com/drive/folders/1bL5IrMantZIBQvIwwitd8bechm-MpGNP?usp=drive_link" 
                        target="_blank" 
@@ -212,8 +250,8 @@
                 </div>
             </div>
 
-            <!-- Right Avatar Panel -->
-            <div class="lg:col-span-5 flex justify-center">
+            <!-- Right Avatar Panel with Spider-Sense -->
+            <div class="lg:col-span-5 flex justify-center spider-sense">
                 <div class="relative w-64 h-64 md:w-80 md:h-80 group">
                     <div class="absolute inset-0 bg-gradient-to-tr from-[#FF0055] to-[#FFD000] rounded-full blur-2xl opacity-45 group-hover:opacity-70 transition-opacity duration-300"></div>
                     <div class="absolute inset-0 bg-[#00F0FF] hex-clip border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] p-2 transform group-hover:scale-105 transition-transform duration-300">
@@ -227,11 +265,17 @@
         </div>
     </header>
 
+    <div class="web-divider"></div>
+
     <!-- Student Info Section -->
     <section id="about" class="py-16 bg-[#11001c]/90 border-y-4 border-black relative">
+        <!-- Spidey Action Badge -->
+        <div class="absolute -top-6 left-12 bg-[#FFD000] text-black border-4 border-black px-4 py-1 font-black transform -rotate-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] spidey-badge text-xl">
+            WHOOSH!
+        </div>
         <div class="max-w-6xl mx-auto px-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="comic-box bg-[#1b0a2a] p-6 rounded border-2 border-black text-center group">
+                <div class="comic-box-tilt bg-[#1b0a2a] p-6 rounded border-2 border-black text-center group">
                     <div class="w-12 h-12 bg-[#FF0055] rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-black group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-user-graduate text-white"></i>
                     </div>
@@ -239,7 +283,7 @@
                     <p class="font-bold text-gray-200 text-sm">Nguyễn Phương Nam</p>
                 </div>
 
-                <div class="comic-box bg-[#1b0a2a] p-6 rounded border-2 border-black text-center group">
+                <div class="comic-box-tilt bg-[#1b0a2a] p-6 rounded border-2 border-black text-center group">
                     <div class="w-12 h-12 bg-[#00F0FF] rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-black group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-id-card text-black"></i>
                     </div>
@@ -247,7 +291,7 @@
                     <p class="font-bold text-gray-200 text-sm">25040903</p>
                 </div>
 
-                <div class="comic-box bg-[#1b0a2a] p-6 rounded border-2 border-black text-center group">
+                <div class="comic-box-tilt bg-[#1b0a2a] p-6 rounded border-2 border-black text-center group">
                     <div class="w-12 h-12 bg-[#FFD000] rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-black group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-graduation-cap text-black"></i>
                     </div>
@@ -255,7 +299,7 @@
                     <p class="font-bold text-gray-200 text-xs">Ngôn ngữ & Văn hoá Anh - ĐH Ngoại ngữ</p>
                 </div>
 
-                <div class="comic-box bg-[#1b0a2a] p-6 rounded border-2 border-black text-center group">
+                <div class="comic-box-tilt bg-[#1b0a2a] p-6 rounded border-2 border-black text-center group">
                     <div class="w-12 h-12 bg-[#FF0055] rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-black group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-building-columns text-white"></i>
                     </div>
@@ -268,6 +312,10 @@
 
     <!-- Portfolio Objectives Section -->
     <section id="objectives" class="py-20 bg-[#0d0221]/95 relative overflow-hidden">
+        <!-- Spidey Action Badge -->
+        <div class="absolute -top-6 right-16 bg-[#FF0055] text-white border-4 border-black px-5 py-1 font-black transform rotate-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] spidey-badge text-xl">
+            WHAM!
+        </div>
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center space-y-4 mb-16">
                 <p class="comic-font text-[#FFD000] text-xl tracking-wider uppercase">★ PORTFOLIO OBJECTIVES ★</p>
@@ -276,7 +324,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="comic-box bg-[#1b0a2a] p-8 border-4 border-black relative rounded">
+                <div class="comic-box-tilt bg-[#1b0a2a] p-8 border-4 border-black relative rounded">
                     <div class="absolute -top-5 -right-5 w-12 h-12 bg-[#FF0055] border-2 border-black rounded-full flex items-center justify-center text-lg font-black text-white">1</div>
                     <h3 class="comic-font text-2xl text-[#FF0055] mb-4">HỆ THỐNG HOÁ TRI THỨC</h3>
                     <p class="text-xs text-gray-300 leading-relaxed">
@@ -284,7 +332,7 @@
                     </p>
                 </div>
 
-                <div class="comic-box bg-[#1b0a2a] p-8 border-4 border-black relative rounded">
+                <div class="comic-box-tilt bg-[#1b0a2a] p-8 border-4 border-black relative rounded">
                     <div class="absolute -top-5 -right-5 w-12 h-12 bg-[#00F0FF] border-2 border-black rounded-full flex items-center justify-center text-lg font-black text-black">2</div>
                     <h3 class="comic-font text-2xl text-[#00F0FF] mb-4">MINH CHỨNG NĂNG LỰC SỐ</h3>
                     <p class="text-xs text-gray-300 leading-relaxed">
@@ -292,7 +340,7 @@
                     </p>
                 </div>
 
-                <div class="comic-box bg-[#1b0a2a] p-8 border-4 border-black relative rounded">
+                <div class="comic-box-tilt bg-[#1b0a2a] p-8 border-4 border-black relative rounded">
                     <div class="absolute -top-5 -right-5 w-12 h-12 bg-[#FFD000] border-2 border-black rounded-full flex items-center justify-center text-lg font-black text-black">3</div>
                     <h3 class="comic-font text-2xl text-[#FFD000] mb-4">ĐỊNH HÌNH TƯ DUY AI</h3>
                     <p class="text-xs text-gray-300 leading-relaxed">
@@ -305,6 +353,10 @@
 
     <!-- Project Global Reflections Section (Summary) -->
     <section id="summary" class="py-20 relative bg-[#08020f] border-t-4 border-black halftone-yellow">
+        <!-- Spidey Action Badge -->
+        <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-[#00F0FF] text-black border-4 border-black px-6 py-1 font-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] spidey-badge text-2xl">
+            THWIP!
+        </div>
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center space-y-4 mb-16">
                 <p class="comic-font text-[#00F0FF] text-xl tracking-wider uppercase">★ GLOBAL REFLECTIONS ★</p>
@@ -314,7 +366,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Thuận lợi -->
-                <div class="comic-box bg-[#11001c] p-8 border-4 border-black rounded">
+                <div class="comic-box-tilt bg-[#11001c] p-8 border-4 border-black rounded">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-10 h-10 bg-[#00F0FF] border-2 border-black rounded-full flex items-center justify-center text-black">
                             <i class="fa-solid fa-thumbs-up"></i>
@@ -330,7 +382,7 @@
                 </div>
 
                 <!-- Khó khăn -->
-                <div class="comic-box bg-[#11001c] p-8 border-4 border-black rounded">
+                <div class="comic-box-tilt bg-[#11001c] p-8 border-4 border-black rounded">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-10 h-10 bg-[#FF0055] border-2 border-black rounded-full flex items-center justify-center text-white">
                             <i class="fa-solid fa-triangle-exclamation"></i>
@@ -345,7 +397,7 @@
                 </div>
 
                 <!-- Bài học -->
-                <div class="comic-box bg-[#11001c] p-8 border-4 border-black rounded">
+                <div class="comic-box-tilt bg-[#11001c] p-8 border-4 border-black rounded">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-10 h-10 bg-[#FFD000] border-2 border-black rounded-full flex items-center justify-center text-black">
                             <i class="fa-solid fa-graduation-cap"></i>
@@ -371,51 +423,54 @@
         </a>
     </div>
 
-    <!-- Interactive Academic Assignments Dashboard -->
+    <!-- Interactive Academic Assignments Dashboard (Flat Design - NO TILT) -->
     <section id="dashboard" class="py-20 bg-[#0d0221]/90 border-t-4 border-black">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center space-y-4 mb-12">
                 <p class="comic-font text-[#FFD000] text-xl tracking-wider uppercase">★ ASSIGNMENT MODULES ★</p>
                 <h2 class="text-4xl md:text-6xl uppercase tracking-tight text-white neon-text-pink">CHI TIẾT CÁC BÀI TẬP DỰ ÁN</h2>
                 <div class="w-24 h-1 bg-[#FF0055] mx-auto rounded-full"></div>
+                <p class="text-gray-400 max-w-lg mx-auto text-xs md:text-sm">
+                    Dưới đây là tóm tắt quy trình thực hiện, nội dung cốt lõi và bài học thực chứng từ 6 nhiệm vụ thực hành mình tự tay xây dựng.
+                </p>
             </div>
 
-            <!-- Tab Buttons (Spider-man Comic Book panels style) -->
+            <!-- Tab Buttons (Flat Comic Panel buttons - NO TILT) -->
             <div class="flex overflow-x-auto gap-4 pb-6 no-scrollbar snap-x justify-start lg:justify-center">
-                <button onclick="switchTab(1)" id="tabBtn1" class="comic-box bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200 comic-btn-active">
+                <button onclick="switchTab(1)" id="tabBtn1" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200 comic-btn-active">
                     Bài 1: macOS Finder
                 </button>
-                <button onclick="switchTab(2)" id="tabBtn2" class="comic-box bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
+                <button onclick="switchTab(2)" id="tabBtn2" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
                     Bài 2: Academic Sources
                 </button>
-                <button onclick="switchTab(3)" id="tabBtn3" class="comic-box bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
+                <button onclick="switchTab(3)" id="tabBtn3" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
                     Bài 3: Prompt Engineering
                 </button>
-                <button onclick="switchTab(4)" id="tabBtn4" class="comic-box bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
+                <button onclick="switchTab(4)" id="tabBtn4" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
                     Bài 4: Group Collab
                 </button>
-                <button onclick="switchTab(5)" id="tabBtn5" class="comic-box bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
+                <button onclick="switchTab(5)" id="tabBtn5" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
                     Bài 5: Generative AI
                 </button>
-                <button onclick="switchTab(6)" id="tabBtn6" class="comic-box bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
+                <button onclick="switchTab(6)" id="tabBtn6" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
                     Bài 6: Responsible AI
                 </button>
             </div>
 
-            <!-- Tab Content Container -->
+            <!-- Tab Content Container (Flat Comic Panels - NO TILT) -->
             <div class="relative mt-8">
                 
                 <!-- TAB 1: macOS Finder (Full 12 Steps) -->
                 <div id="tabContent1" class="tab-content block animate-fade-in">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                         <div class="lg:col-span-4 space-y-6">
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-3xl text-[#FFD000] mb-4">MỤC TIÊU BÀI HỌC</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     Thiết lập và làm chủ kỹ năng tương tác với hệ thống lưu trữ tệp tin trên hệ điều hành macOS. Từng bước xây dựng thói quen tổ chức dữ liệu chuẩn hóa từ cơ bản nhất.
                                 </p>
                             </div>
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-3xl text-[#FF0055] mb-4">BÀI HỌC RÚT RA</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     Việc quản lý dữ liệu cá nhân chặt chẽ giúp tiết kiệm lên tới 40% thời gian tìm kiếm tệp tin và ngăn chặn hoàn toàn rủi ro mất dữ liệu do thao tác sai hoặc hỏng hóc thiết bị.
@@ -423,65 +478,65 @@
                             </div>
                         </div>
 
-                        <div class="lg:col-span-8 comic-box bg-[#11001c] p-8 border-4 border-black rounded halftone-yellow">
+                        <div class="lg:col-span-8 comic-box-flat bg-[#11001c] p-8 border-4 border-black rounded halftone-yellow">
                             <h3 class="comic-font text-3xl text-white mb-6">QUY TRÌNH THỰC HIỆN 12 BƯỚC CHI TIẾT</h3>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[450px] overflow-y-auto pr-2">
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">01</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">MỞ FINDER</h4>
                                     <p class="text-[11px] text-gray-300">Nhấp vào biểu tượng Finder (mặt cười xanh trắng) trên Dock hoặc nhấn <code>Cmd + N</code>.</p>
                                 </div>
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">02</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">TRUY CẬP THƯ MỤC</h4>
                                     <p class="text-[11px] text-gray-300">Tại thanh bên trái, nhấp chọn ổ đĩa <code>Macintosh HD</code> hoặc thư mục hệ thống <code>Documents</code>.</p>
                                 </div>
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">03</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">TẠO THƯ MỤC MỚI</h4>
                                     <p class="text-[11px] text-gray-300">Nhấp chuột phải chọn <code>New Folder</code> hoặc <code>Shift + Cmd + N</code>. Đặt tên <code>ThucHanh_NguyenPhuongNam</code>.</p>
                                 </div>
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">04</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">VÀO THƯ MỤC</h4>
                                     <p class="text-[11px] text-gray-300">Nhấp đúp chuột để truy cập trực tiếp vào thư mục vừa tạo.</p>
                                 </div>
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">05</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">TẠO TỆP TIN</h4>
                                     <p class="text-[11px] text-gray-300">Tạo tệp văn bản thô dạng <code>GhiChu.txt</code> để lưu trữ thông tin ban đầu.</p>
                                 </div>
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">06</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">ĐỔI TÊN TỆP TIN</h4>
                                     <p class="text-[11px] text-gray-300">Chuột phải chọn <code>Rename</code> hoặc nhấn <code>Return</code>. Đổi tên thành <code>GhiChuQuanTrong.txt</code>.</p>
                                 </div>
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">07</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">TẠO THƯ MỤC CON</h4>
                                     <p class="text-[11px] text-gray-300">Trong thư mục lớn, chuột phải chọn <code>New Folder</code> đặt tên là <code>TaiLieu</code>.</p>
                                 </div>
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">08</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">SAO CHÉP (COPY & PASTE)</h4>
                                     <p class="text-[11px] text-gray-300">Chuột phải vào tệp chọn <code>Copy</code>, chuyển vào <code>TaiLieu</code> và chọn <code>Paste</code>.</p>
                                 </div>
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">09</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">DI CHUYỂN TỆP TIN</h4>
                                     <p class="text-[11px] text-gray-300">Sử dụng thao tác kéo thả hoặc tổ hợp <code>Cmd + C</code> rồi <code>Option + Cmd + V</code> để di chuyển tệp tin <code>DiChuyen.txt</code>.</p>
                                 </div>
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">10</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">XÓA TỆP TIN</h4>
                                     <p class="text-[11px] text-gray-300">Nhấp chuột phải chọn <code>Move to Trash</code> hoặc nhấn tổ hợp phím <code>Cmd + Delete</code>.</p>
                                 </div>
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">11</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">XÓA VĨNH VIỄN</h4>
                                     <p class="text-[11px] text-gray-300">Vào Thùng rác (Trash), nhấp chuột phải vào tệp chọn <code>Delete Immediately...</code>.</p>
                                 </div>
-                                <div class="bg-[#1b0a2a] p-4 border-2 border-black rounded relative">
+                                <div class="bg-black/40 p-4 border-2 border-black rounded relative">
                                     <span class="absolute top-2 right-2 text-[10px] bg-[#FF0055] px-2 py-0.5 rounded">12</span>
                                     <h4 class="font-bold text-xs text-[#00F0FF] mb-1">KHÔI PHỤC (PUT BACK)</h4>
                                     <p class="text-[11px] text-gray-300">Tại Thùng rác (Trash), chuột phải chọn <code>Put Back</code> để khôi phục tệp về vị trí cũ.</p>
@@ -495,13 +550,13 @@
                 <div id="tabContent2" class="tab-content hidden animate-fade-in">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                         <div class="lg:col-span-3 space-y-6">
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-2xl text-[#00F0FF] mb-4">MỤC TIÊU BÀI HỌC</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     Xây dựng quy trình tổng quan và thẩm định đa dạng nguồn học thuật tin cậy phục vụ nghiên cứu sự tác động của AI đối với kỹ năng viết học thuật.
                                 </p>
                             </div>
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-2xl text-[#FF0055] mb-4">BÀI HỌC RÚT RA</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     Không sử dụng tài liệu trôi nổi. Việc tìm kiếm cần thực hiện trên các công cụ như Google Scholar, thư viện số và đánh giá chéo độ uy tín tác giả và đơn vị xuất bản.
@@ -509,7 +564,7 @@
                             </div>
                         </div>
 
-                        <div class="lg:col-span-9 comic-box bg-[#11001c] p-6 border-4 border-black rounded halftone-yellow">
+                        <div class="lg:col-span-9 comic-box-flat bg-[#11001c] p-6 border-4 border-black rounded halftone-yellow">
                             <h3 class="comic-font text-3xl text-white mb-4">BẢNG THẨM ĐỊNH CHI TIẾT 11 TÀI LIỆU HỌC THUẬT</h3>
                             <div class="overflow-x-auto">
                                 <table class="w-full text-left text-xs border-collapse">
@@ -599,13 +654,13 @@
                 <div id="tabContent3" class="tab-content hidden animate-fade-in">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                         <div class="lg:col-span-3 space-y-6">
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-2xl text-[#FFD000] mb-4">MỤC TIÊU BÀI HỌC</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     Thử nghiệm và tối ưu hóa câu lệnh cho mô hình LLM. Hiểu rõ mối liên hệ nhân quả giữa cấu trúc prompt cụ thể và độ chính xác của kết quả đầu ra.
                                 </p>
                             </div>
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-2xl text-[#FF0055] mb-4">BÀI HỌC RÚT RA</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     Prompt dài hơn không đồng nghĩa với việc tốt hơn. Sự cải tiến vượt trội đến từ việc làm rõ Vai trò (Role), Ngữ cảnh người dùng (Context) và Chuỗi suy luận (CoT).
@@ -614,7 +669,7 @@
                         </div>
 
                         <!-- Interactive Slider / Tab selector for Prompt Tasks -->
-                        <div class="lg:col-span-9 comic-box bg-[#11001c] p-6 border-4 border-black rounded halftone-yellow">
+                        <div class="lg:col-span-9 comic-box-flat bg-[#11001c] p-6 border-4 border-black rounded halftone-yellow space-y-4">
                             <div class="flex gap-2 border-b-2 border-black pb-3 mb-4">
                                 <button onclick="switchPromptTask(1)" id="pBtn1" class="px-3 py-1 bg-[#FF0055] text-white text-xs font-bold rounded">Tác vụ 1: Tóm tắt</button>
                                 <button onclick="switchPromptTask(2)" id="pBtn2" class="px-3 py-1 bg-[#1b0a2a] text-[#00F0FF] text-xs font-bold rounded">Tác vụ 2: Giải thích ML</button>
@@ -635,7 +690,7 @@
                                 </div>
                                 <div class="bg-black/50 p-4 border border-[#00F0FF]/30 rounded text-xs space-y-2">
                                     <p class="font-bold text-[#00F0FF]"><i class="fa-solid fa-code"></i> Phiên bản 3: Prompt nâng cao</p>
-                                    <p class="italic text-gray-400">"Vai trò: Trợ lý học thuật chuyên hỗ trợ sinh viên đại học phân tích tài liệu. Nhiệm vụ: Tóm tắt bài nghiên cứu theo quy trình: Bước 1 - Xác định loại nghiên cứu; Bước 2 - Tóm tắt cấu trúc Mục tiêu | Phương pháp | Kết quả chính | Ý nghĩa | Hạn chế; Bước 3 - Đánh giá độ tin cậy; Bước 4 - Gợi ý câu hỏi. Độ dài 400-500 từ."</p>
+                                    <p class="italic text-gray-400">"Vai trò: Trợ lý học thuật chuyên hỗ trợ sinh viên đại học phân tích tài liệu. Nhiệm vụ: Tóm tắt bài nghiên cứu dưới đây theo quy trình: Bước 1 - Xác định loại nghiên cứu (định lượng/định tính/hỗn hợp); Bước 2 - Tóm tắt có cấu trúc gồm: Mục tiêu | Phương pháp | Kết quả chính | Ý nghĩa thực tiễn | Hạn chế; Bước 3 - Đánh giá độ tin cậy: chỉ ra 1-2 điểm mạnh và 1 điểm yếu phương pháp luận; Bước 4 - Gợi ý 2 câu hỏi nghiên cứu tiếp theo. Định dạng đầu ra chi tiết, độ dài 400-500 từ."</p>
                                     <p class="text-gray-300"><strong class="text-[#00F0FF]">Kết quả vượt trội:</strong> Bản tóm tắt đầy đủ, sâu sắc, có đánh giá phản biện về phương pháp luận và định hướng hướng đi tiếp theo.</p>
                                 </div>
                             </div>
@@ -649,12 +704,12 @@
                                 </div>
                                 <div class="bg-black/50 p-4 border border-[#FF0055]/30 rounded text-xs space-y-2">
                                     <p class="font-bold text-[#FF0055]"><i class="fa-solid fa-code"></i> Phiên bản 2: Prompt cải tiến</p>
-                                    <p class="italic text-gray-400">"Tôi là sinh viên năm 2 công nghệ thông tin. Hãy giải thích Machine Learning theo các bước: (1) Định nghĩa đơn giản, (2) So sánh lập trình truyền thống, (3) Cho 2 ví dụ thực tế, (4) Tóm tắt ý chính trong 2 câu."</p>
+                                    <p class="italic text-gray-400">"Tôi là sinh viên năm 2 đại học, đang học môn Nhập môn Trí tuệ Nhân tạo. Hãy giải thích khái niệm Machine Learning theo các bước: (1) Định nghĩa đơn giản, (2) So sánh với lập trình truyền thống, (3) Cho 2 ví dụ ứng dụng thực tế trong cuộc sống hàng ngày, (4) Tóm tắt ý chính trong 2 câu. Tránh dùng ký hiệu toán học phức tạp."</p>
                                     <p class="text-gray-300"><strong class="text-green-400">Kết quả:</strong> Cấu trúc rõ ràng hơn, có ví dụ thực tế gần gũi như Netflix hay lọc thư rác Spam. Tuy nhiên, một số thuật ngữ sâu vẫn chưa được làm rõ nghĩa.</p>
                                 </div>
                                 <div class="bg-black/50 p-4 border border-[#00F0FF]/30 rounded text-xs space-y-2">
                                     <p class="font-bold text-[#00F0FF]"><i class="fa-solid fa-code"></i> Phiên bản 3: Prompt nâng cao</p>
-                                    <p class="italic text-gray-400">"Vai trò: Bạn là giảng viên xuất sắc giải thích AI cho người mới. Dùng phép ẩn dụ sáng tạo và quy trình chain-of-thought: 1. Ẩn dụ đời thường; 2. Định nghĩa chính xác kỹ thuật; 3. Bảng so sánh ML và Truyền thống; 4. Python pseudocode đơn giản; 5. Câu hỏi trắc nghiệm tự kiểm tra. Độ dài 500-600 từ."</p>
+                                    <p class="italic text-gray-400">"Vai trò: Bạn là giảng viên giỏi nhất trong việc giải thích khái niệm AI cho người mới bắt đầu, luôn dùng phép ẩn dụ sáng tạo và ví dụ từ cuộc sống. Ngữ cảnh: Học sinh cần giải thích: Tôi là sinh viên năm 2 Công nghệ Thông tin, biết lập trình Python cơ bản nhưng chưa học ML. Tôi đang chuẩn bị cho bài kiểm tra cuối kỳ về Nhập môn AI. Quy trình giải thích (chain-of-thought): 1. Bắt đầu bằng một phép ẩn dụ đời thường để tạo trực giác về ML; 2. Giải thích định nghĩa chính xác (kỹ thuật); 3. So sánh: ML vs Lập trình truyền thống (dùng bảng hoặc sơ đồ text); 4. Ba loại ML chính - mỗi loại 1 câu định nghĩa + 1 ví dụ thực tế; 5. Pseudocode Python đơn giản minh họa ý tưởng train/predict; 6. Câu hỏi kiểm tra: đặt 3 câu hỏi trắc nghiệm để tôi tự kiểm tra. Ví dụ loại ẩn dụ tốt (few-shot): 'Học máy giống như dạy một đứa trẻ nhận ra mèo bằng cách cho xem 1000 bức ảnh, không phải bằng cách đọc định nghĩa về mèo.' Độ dài: 500-600 từ. Ngôn ngữ: Tiếng Việt."</p>
                                     <p class="text-gray-300"><strong class="text-[#00F0FF]">Kết quả vượt trội:</strong> Giải thích cực kỳ trực quan thông qua phép ẩn dụ (dạy trẻ nhận diện con mèo), mã giả dễ học, có bộ câu hỏi tự ôn thi hoàn chỉnh.</p>
                                 </div>
                             </div>
@@ -668,12 +723,12 @@
                                 </div>
                                 <div class="bg-black/50 p-4 border border-[#FF0055]/30 rounded text-xs space-y-2">
                                     <p class="font-bold text-[#FF0055]"><i class="fa-solid fa-code"></i> Phiên bản 2: Prompt cải tiến</p>
-                                    <p class="italic text-gray-400">"Tạo 10 câu hỏi ôn tập cấu trúc tế bào cho sinh viên năm nhất y dược. Gồm: 4 câu trắc nghiệm (có đáp án), 3 câu hỏi ngắn (giải thích), 3 câu so sánh (nhân sơ và nhân thực)."</p>
+                                    <p class="italic text-gray-400">"Tạo 10 câu hỏi ôn tập về chương 'Cấu trúc tế bào' cho sinh viên năm nhất đại học y dược. Bao gồm: 4 câu hỏi trắc nghiệm (có 4 đáp án A/B/C/D và đáp án đúng), 3 câu hỏi ngắn (cần giải thích 2-3 câu), 3 câu hỏi so sánh (ví dụ: so sánh tế bào nhân sơ và nhân thực). Sắp xếp từ dễ đến khó."</p>
                                     <p class="text-gray-300"><strong class="text-green-400">Kết quả:</strong> Tạo được bộ câu hỏi đa dạng và có cấu trúc hơn, nhưng các câu hỏi so sánh còn hời hợt và chưa phủ hết được toàn bộ nội dung lý thuyết quan trọng.</p>
                                 </div>
                                 <div class="bg-black/50 p-4 border border-[#00F0FF]/30 rounded text-xs space-y-2">
                                     <p class="font-bold text-[#00F0FF]"><i class="fa-solid fa-code"></i> Phiên bản 3: Prompt nâng cao</p>
-                                    <p class="italic text-gray-400">"Vai trò: Chuyên gia thiết kế đề thi sinh học đại học am hiểu Thang đánh giá Bloom's Taxonomy. Nhiệm vụ: Tạo bộ 15 câu hỏi ôn tập chương 'Cấu trúc tế bào' phân bố đầy đủ 6 cấp độ Bloom (Nhớ, Hiểu, Áp dụng, Phân tích, Đánh giá, Sáng tạo). Định dạng rõ ràng đáp án gợi ý và từ khóa chấm điểm."</p>
+                                    <p class="italic text-gray-400">"Vai trò: Bạn là chuyên gia thiết kế đề thi sinh học đại học, am hiểu thang đánh giá Bloom's Taxonomy. Nhiệm vụ: Tạo bộ 15 câu hỏi ôn tập chương 'Cấu trúc Tế bào' theo thang Bloom đầy đủ: [Nhớ - Remember] 3 câu: định nghĩa, liệt kê thành phần; [Hiểu - Understand] 3 câu: giải thích chức năng, so sánh; [Áp dụng - Apply] 3 câu: tình huống lâm sàng (ví dụ: bệnh liên quan đến rối loạn bào quan); [Phân tích - Analyze] 2 câu: phân tích mối quan hệ cấu trúc - chức năng; [Đánh giá - Evaluate] 2 câu: phán đoán dựa trên dữ liệu thực nghiệm; [Sáng tạo - Create] 2 câu: đề xuất giải pháp/thiết kế thí nghiệm. Format mỗi câu hỏi: - Mức độ Bloom: [tên mức] - Câu hỏi: ... - Đáp án gợi ý: ... - Từ khóa chấm điểm: ... Few-shot ví dụ định dạng mong muốn: Mức độ Bloom: [Áp dụng] Câu hỏi: Bệnh nhân bị rối loạn chức năng ty thể. Hãy dự đoán 3 triệu chứng lâm sàng có thể xuất hiện và giải thích cơ chế. Đáp án gợi ý: Mệt mỏi cơ (thiếu ATP), suy tim (cơ tim cần nhiều năng lượng), suy giảm nhận thức (não nhạy cảm với thiếu oxy). Từ khóa: ATP, ty thể, năng lượng, cơ quan đích."</p>
                                     <p class="text-gray-300"><strong class="text-[#00F0FF]">Kết quả vượt trội:</strong> Đề thi vô cùng chuyên nghiệp, có các câu hỏi tình huống lâm sàng sâu sắc, đáp ứng chính xác yêu cầu thi cử chuẩn đại học.</p>
                                 </div>
                             </div>
@@ -686,13 +741,13 @@
                 <div id="tabContent4" class="tab-content hidden animate-fade-in">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                         <div class="lg:col-span-4 space-y-6">
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-2xl text-[#FF0055] mb-4">MỤC TIÊU BÀI HỌC</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     Thiết lập quy trình làm việc nhóm trực tuyến đồng bộ bằng việc liên kết hệ sinh thái Trello (Quản lý), Google Workspace (Biên tập) và Slack (Trao đổi).
                                 </p>
                             </div>
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-2xl text-[#00F0FF] mb-4">BÀI HỌC RÚT RA</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     Cộng tác số đòi hỏi quy trình rõ ràng và đặt tên tệp thống nhất. Giải quyết thách thức quá tải thông báo (Notification Overload) nhờ chế độ Do Not Disturb thông minh.
@@ -701,7 +756,7 @@
                         </div>
 
                         <!-- Simulated Interactive Kanban Board -->
-                        <div class="lg:col-span-8 comic-box bg-[#11001c] p-6 border-4 border-black rounded halftone-yellow space-y-6">
+                        <div class="lg:col-span-8 comic-box-flat bg-[#11001c] p-6 border-4 border-black rounded halftone-yellow space-y-6">
                             <h3 class="comic-font text-3xl text-white mb-2">QUY TRÌNH KANBAN CÁ NHÂN (TRELLO)</h3>
                             <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
                                 <div class="bg-black/50 p-3 rounded border border-gray-800">
@@ -751,13 +806,13 @@
                 <div id="tabContent5" class="tab-content hidden animate-fade-in">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                         <div class="lg:col-span-3 space-y-6">
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-2xl text-[#FFD000] mb-4">MỤC TIÊU BÀI HỌC</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     Hiểu rõ thế mạnh của từng công cụ AI tạo sinh khác nhau và phối hợp chúng để tối ưu hóa quy trình sản xuất nội dung số chuyên nghiệp.
                                 </p>
                             </div>
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-2xl text-[#FF0055] mb-4">BÀI HỌC RÚT RA</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     AI tuyệt vời để xây dựng ý tưởng ban đầu, nhưng con người bắt buộc phải có vai trò kiểm chứng chéo thông tin để tránh lỗi ảo tưởng (Hallucination) và nâng cao dấu ấn sáng tạo cá nhân.
@@ -765,7 +820,7 @@
                             </div>
                         </div>
 
-                        <div class="lg:col-span-9 comic-box bg-[#11001c] p-6 border-4 border-black rounded halftone-yellow space-y-4">
+                        <div class="lg:col-span-9 comic-box-flat bg-[#11001c] p-6 border-4 border-black rounded halftone-yellow space-y-4">
                             <h3 class="comic-font text-3xl text-white mb-2">QUY TRÌNH PHỐI HỢP ĐA CÔNG CỤ TẠO SINH</h3>
                             
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -804,13 +859,13 @@
                 <div id="tabContent6" class="tab-content hidden animate-fade-in">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                         <div class="lg:col-span-4 space-y-6">
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-2xl text-[#00F0FF] mb-4">MỤC TIÊU BÀI HỌC</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     Nghiên cứu sâu chính sách định hướng sử dụng AI tại Trường Đại học Ngoại ngữ - ĐHQGHN để đảm bảo mọi hành vi ứng dụng công nghệ đều hợp lệ.
                                 </p>
                             </div>
-                            <div class="comic-box bg-[#1b0a2a] p-6 border-4 border-black rounded">
+                            <div class="comic-box-flat bg-[#1b0a2a] p-6 border-4 border-black rounded">
                                 <h3 class="comic-font text-2xl text-[#FF0055] mb-4">BÀI HỌC RÚT RA</h3>
                                 <p class="text-xs text-gray-300 leading-relaxed">
                                     Tự thiết lập một bộ quy chuẩn cá nhân giúp bảo vệ sự liêm chính của bản thân, biến AI thành người đồng hành bền vững thay vì biến mình thành nô lệ của công nghệ.
@@ -819,7 +874,7 @@
                         </div>
 
                         <!-- Checklist for Personal Ethics -->
-                        <div class="lg:col-span-8 comic-box bg-[#11001c] p-8 border-4 border-black rounded halftone-yellow space-y-6">
+                        <div class="lg:col-span-8 comic-box-flat bg-[#11001c] p-8 border-4 border-black rounded halftone-yellow space-y-6">
                             <h3 class="comic-font text-3xl text-white mb-2">BỘ NGUYÊN TẮC CÁ NHÂN KHI SỬ DỤNG AI</h3>
                             <p class="text-xs text-gray-400">Vui lòng nhấp chọn các quy tắc bên dưới để xem chi tiết cam kết thực hiện:</p>
                             
@@ -1100,9 +1155,9 @@
         }
         animationLoop();
 
-        // Comic Box Interactive 3D Rotation Hover Effect
-        const boxes = document.querySelectorAll('.comic-box');
-        boxes.forEach(box => {
+        // 3D Tilt Interaction on Card Elements (Excluding Assignments Dashboard!)
+        const tiltBoxes = document.querySelectorAll('.comic-box-tilt');
+        tiltBoxes.forEach(box => {
             box.addEventListener('mousemove', (e) => {
                 const rect = box.getBoundingClientRect();
                 const mouseX = e.clientX - rect.left;
