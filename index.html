@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyễn Phương Nam Portfolio</title>
+    <title>Nguyễn Phương Nam - Digital Portfolio</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -254,7 +254,7 @@
             <div class="lg:col-span-5 flex justify-center spider-sense">
                 <div class="relative w-64 h-64 md:w-80 md:h-80 group">
                     <div class="absolute inset-0 bg-gradient-to-tr from-[#FF0055] to-[#FFD000] rounded-full blur-2xl opacity-45 group-hover:opacity-70 transition-opacity duration-300"></div>
-                    <div class="absolute inset-0 bg-[#00F0FF] hex-clip border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] p-2 transform group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-[#00F0FF] hex-clip border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] p-2 transform group-hover:scale-105 transition-transform duration-500">
                         <div class="w-full h-full bg-[#11001c] hex-clip relative overflow-hidden">
                             <img src="Hình 1.jpg" alt="Nguyễn Phương Nam" class="w-full h-full object-cover transform scale-110 group-hover:scale-120 transition-transform duration-500">
                             <div class="absolute inset-0 bg-gradient-to-t from-[#FF0055]/40 to-transparent mix-blend-overlay"></div>
@@ -376,7 +376,7 @@
                     <ul class="space-y-3 text-xs text-gray-300 list-disc list-inside">
                         <li>Được tiếp cận bài giảng chi tiết, logic từ giảng viên môn học.</li>
                         <li>Các tài liệu học thuật về AI phong phú, dễ tra cứu trên hệ thống số.</li>
-                        <li>Sở hữu các thiết bị phần cứng mạnh mẽ hỗ trợ tối đa việc cài đặt và thực nghiệm liên tục.</li>
+                        <li>Sở hữu các thiết bị phần cứng mạnh mẽ hỗ tử tối đa việc cài đặt và thực nghiệm liên tục.</li>
                         <li>Môi trường học tập tại ULIS năng động, đề cao tính thực chứng số.</li>
                     </ul>
                 </div>
@@ -423,7 +423,7 @@
         </a>
     </div>
 
-    <!-- Interactive Academic Assignments Dashboard (Flat Design - NO TILT) -->
+    <!-- Interactive Academic Assignments Dashboard (Flat Design - NO TILT, Fixed Grid of 3 columns x 2 rows on md+) -->
     <section id="dashboard" class="py-20 bg-[#0d0221]/90 border-t-4 border-black">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center space-y-4 mb-12">
@@ -435,24 +435,24 @@
                 </p>
             </div>
 
-            <!-- Tab Buttons (Flat Comic Panel buttons - NO TILT) -->
-            <div class="flex overflow-x-auto gap-4 pb-6 no-scrollbar snap-x justify-start lg:justify-center">
-                <button onclick="switchTab(1)" id="tabBtn1" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200 comic-btn-active">
+            <!-- Tab Buttons Grid (3 on Top, 3 on Bottom on md+ screens - NO TILT, Auto wrapping text) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pb-6">
+                <button onclick="switchTab(1)" id="tabBtn1" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-4 py-3 font-bold text-[11px] md:text-xs uppercase rounded border-2 border-black hover:bg-[#FF0055] hover:text-white transition-all duration-200 text-center w-full min-h-[64px] flex items-center justify-center leading-tight comic-btn-active">
                     Bài 1: Thao tác cơ bản với tệp tin và thư mục
                 </button>
-                <button onclick="switchTab(2)" id="tabBtn2" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
+                <button onclick="switchTab(2)" id="tabBtn2" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-4 py-3 font-bold text-[11px] md:text-xs uppercase rounded border-2 border-black hover:bg-[#FF0055] hover:text-white transition-all duration-200 text-center w-full min-h-[64px] flex items-center justify-center leading-tight">
                     Bài 2: Tìm kiếm và đánh giá thông tin học thuật
                 </button>
-                <button onclick="switchTab(3)" id="tabBtn3" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
+                <button onclick="switchTab(3)" id="tabBtn3" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-4 py-3 font-bold text-[11px] md:text-xs uppercase rounded border-2 border-black hover:bg-[#FF0055] hover:text-white transition-all duration-200 text-center w-full min-h-[64px] flex items-center justify-center leading-tight">
                     Bài 3: Viết Prompt hiệu quả cho các tác vụ học tập
                 </button>
-                <button onclick="switchTab(4)" id="tabBtn4" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
+                <button onclick="switchTab(4)" id="tabBtn4" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-4 py-3 font-bold text-[11px] md:text-xs uppercase rounded border-2 border-black hover:bg-[#FF0055] hover:text-white transition-all duration-200 text-center w-full min-h-[64px] flex items-center justify-center leading-tight">
                     Bài 4: Sử dụng công cụ cộng tác trực tuyến cho dự án nhóm
                 </button>
-                <button onclick="switchTab(5)" id="tabBtn5" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
+                <button onclick="switchTab(5)" id="tabBtn5" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-4 py-3 font-bold text-[11px] md:text-xs uppercase rounded border-2 border-black hover:bg-[#FF0055] hover:text-white transition-all duration-200 text-center w-full min-h-[64px] flex items-center justify-center leading-tight">
                     Bài 5: Sử dụng AI tạo sinh để hỗ trợ sáng tạo nội dung
                 </button>
-                <button onclick="switchTab(6)" id="tabBtn6" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-6 py-3 font-bold text-xs uppercase rounded snap-center flex-shrink-0 border-2 border-black hover:bg-[#FF0055] hover:text-white transition-colors duration-200">
+                <button onclick="switchTab(6)" id="tabBtn6" class="comic-box-flat bg-[#1b0a2a] text-[#00F0FF] px-4 py-3 font-bold text-[11px] md:text-xs uppercase rounded border-2 border-black hover:bg-[#FF0055] hover:text-white transition-all duration-200 text-center w-full min-h-[64px] flex items-center justify-center leading-tight">
                     Bài 6: Sử dụng AI có trách nhiệm trong học tập và nghiên cứu
                 </button>
             </div>
